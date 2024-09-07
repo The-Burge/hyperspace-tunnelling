@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export const Passengers: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -26,7 +26,7 @@ export const Passengers: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       />
     </g>
   </svg>
-);
+)
 
 export const Assign: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -45,7 +45,7 @@ export const Assign: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       />
     </g>
   </svg>
-);
+)
 
 export const Checkin: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -82,4 +82,39 @@ export const Checkin: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       </g>
     </g>
   </svg>
-);
+)
+
+export const BurgerMenu: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+)
+
+export const Cross: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    className="h-6 w-6"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+)
