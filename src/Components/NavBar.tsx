@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Navbar, Collapse, IconButton } from '@material-tailwind/react'
@@ -7,34 +8,44 @@ import {
   Checkin,
   BurgerMenu,
   Cross,
+  Home,
 } from '@/icons/navBarIcons'
+import { useRouter } from 'next/navigation'
 
 const narbarItems = [
+  {
+    icon: Home,
+    title: 'Home',
+    description: 'Home page',
+    page: '/',
+    id: 'home_nav',
+  },
   {
     icon: Passengers,
     title: 'View Passengers',
     description: 'Check all passengers aboard',
-    href: '#passengers',
+    page: '/view-passengers',
     id: 'passengers_nav',
   },
   {
     icon: Assign,
     title: 'Assign Passengers',
     description: 'Assign passengers to their seats',
-    href: '#assign',
+    page: '/assign-passengers',
     id: 'assign_nav',
   },
   {
     icon: Checkin,
     title: 'Starship View and Check-in',
     description: 'Manage starship and check-in',
-    href: '#checkin',
+    page: '/view-checkin',
     id: 'checkin_nav',
   },
 ]
 
 export function NavbarDefault() {
   const [openNav, setOpenNav] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,7 +60,7 @@ export function NavbarDefault() {
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ml-auto">
-      {narbarItems.map(({ icon, title, href, id }, key) => (
+      {narbarItems.map(({ icon, title, page, id }, key) => (
         <li
           id={id}
           key={key}
@@ -59,9 +70,12 @@ export function NavbarDefault() {
             className:
               'h-5 w-5 text-primary transition duration-200 hover:text-secondary hover:scale-105',
           })}
-          <a href={href} className="flex items-center">
+          <button
+            onClick={() => router.push(page)} // Navigate programmatically
+            className="flex items-center"
+          >
             {title}
-          </a>
+          </button>
         </li>
       ))}
     </ul>
