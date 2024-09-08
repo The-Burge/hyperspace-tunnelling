@@ -1,5 +1,6 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import { NavbarDefault } from '../NavBar'
+import React from 'react'
 
 jest.mock('next/navigation', () => ({
   useRouter() {
@@ -61,5 +62,24 @@ describe('NavbarDefault Component', () => {
       expect(document.getElementById('assign_nav')).toBeInTheDocument()
       expect(document.getElementById('checkin_nav')).toBeInTheDocument()
     })
+  })
+
+  it('closes mobile menu when window is resized to >= 960px', async () => {
+    render(<NavbarDefault />)
+
+    // Spy on React.useState to capture state updates
+    const setOpenNavSpy = jest.spyOn(React, 'useState')
+
+    resizeWindow(600)
+
+    await waitFor(() => {
+      expect(document.getElementById('burgerMenu_Icon')).toBeInTheDocument()
+    })
+
+    fireEvent.click(document.getElementById('burger_menu')!)
+
+    resizeWindow(1080)
+
+    expect(setOpenNavSpy).toHaveBeenCalledWith(false)
   })
 })

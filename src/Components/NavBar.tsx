@@ -84,7 +84,7 @@ export function NavbarDefault() {
   return (
     <Navbar
       id="navbar"
-      className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4 background"
+      className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4 bg-transparent border-none text-primary !border-0"
     >
       <div className="container mx-auto flex items-center justify-between text-primary">
         <Image
