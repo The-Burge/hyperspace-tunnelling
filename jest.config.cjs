@@ -8,13 +8,16 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
-  collectCoverage: true, // Enable coverage collection
-  coverageDirectory: '<rootDir>/coverage', // Directory where coverage reports will be saved
+  collectCoverage: true,
+  coverageDirectory: '<rootDir>/coverage',
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
     '!**/node_modules/**',
     '!**/.next/**',
   ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 }
 
 module.exports = createJestConfig(customJestConfig)
