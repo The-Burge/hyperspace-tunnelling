@@ -64,14 +64,14 @@ export function NavbarDefault() {
         <li
           id={id}
           key={key}
-          className="flex items-center gap-x-2 p-1 font-medium transition duration-200 hover:text-secondary hover:scale-105"
+          className="flex items-center gap-x-2 p-1 font-medium transition duration-200 hover:text-secondary hover:scale-105 text-lg"
         >
           {React.createElement(icon, {
             className:
               'h-5 w-5 text-primary transition duration-200 hover:text-secondary hover:scale-105',
           })}
           <button
-            onClick={() => router.push(page)} // Navigate programmatically
+            onClick={() => router.push(page)}
             className="flex items-center"
           >
             {title}
@@ -98,6 +98,7 @@ export function NavbarDefault() {
         <div className="hidden lg:block">{navList}</div>
         {/* mobile view */}
         <IconButton
+          id="burger_menu"
           variant="text"
           className="ml-auto h-6 w-6 text-primary lg:hidden"
           ripple={false}
