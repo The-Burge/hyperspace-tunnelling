@@ -1,8 +1,8 @@
 'use client'
-import { Widget } from '@/Components/widget'
+import { Widget } from '@/Components/Widget'
 import React from 'react'
 
-const products = [
+const widgets = [
   {
     img: '/image/passengers.png',
     name: 'View Passengers',
@@ -33,8 +33,8 @@ export default function Home() {
       </div>
       <div className="pt-4">
         <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-3 justify-items-center place-items-center p-5">
-          {products.map((product, index) => (
-            <Widget key={index} product={product} />
+          {widgets.map((items, index) => (
+            <Widget key={index} items={items} />
           ))}
         </div>
       </div>

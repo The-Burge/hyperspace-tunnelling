@@ -10,11 +10,11 @@ interface WidgetProps {
 }
 
 interface WidgetList {
-  product: WidgetProps
+  items: WidgetProps
 }
 
-export function Widget({ product }: WidgetList) {
-  const { img, name, page } = product
+export function Widget({ items }: WidgetList) {
+  const { img, name, page } = items
   const router = useRouter()
 
   const handleCardClick = () => {
