@@ -1,6 +1,14 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import { NavbarDefault } from '../NavBar'
 
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      prefetch: () => null,
+    }
+  },
+}))
+
 beforeAll(() => {
   window.scrollTo = jest.fn()
   window.matchMedia = jest.fn().mockImplementation((query) => {
@@ -34,7 +42,7 @@ describe('NavbarDefault Component', () => {
   })
 
   it('displays burger menu icon and opens mobile menu when clicked on screen size below 960px', async () => {
-    const { getByRole } = render(<NavbarDefault />)
+    render(<NavbarDefault />)
 
     // Resize to below 960px
     resizeWindow(600)
@@ -44,9 +52,8 @@ describe('NavbarDefault Component', () => {
       expect(document.getElementById('burgerMenu_Icon')).toBeInTheDocument()
     })
 
-    // Open the menu
-    const burgerButton = getByRole('button')
-    fireEvent.click(burgerButton)
+    // lets click the burger
+    fireEvent.click(document.getElementById('burger_menu')!)
 
     // Wait for the menu items
     await waitFor(() => {
