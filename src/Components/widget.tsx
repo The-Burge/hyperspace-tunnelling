@@ -24,7 +24,7 @@ export function Widget({ items }: WidgetList) {
   return (
     <Card
       shadow={false}
-      className="w-full max-w-xs cursor-pointer transition duration-200 transform hover:scale-105"
+      className="w-full max-w-xs cursor-pointer transition duration-200 transform hover:scale-105 bg-transparent"
       onClick={handleCardClick}
     >
       <CardBody className="pb-0">
