@@ -19,9 +19,9 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
   return (
     <div
       id="passenger_card"
-      className="relative max-w-sm mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-2 shadow-xl rounded-lg text-primary"
+      className="relative max-w-sm mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-2 shadow-xl rounded-lg text-white"
     >
-      <div className="relative z-10 p-6 bg-white rounded-lg">
+      <div className="relative z-10 p-6 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg">
         <div className="mx-auto w-20 h-20 relative border-4 border-white rounded-full overflow-hidden">
           <Image
             id="passenger_image"
@@ -32,7 +32,7 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
           />
         </div>
         <div id="passenger_details" className="text-center mt-4">
-          <h2 id="passenger_name" className="font-semibold text-primary">
+          <h2 id="passenger_name" className="font-semibold text-white">
             {firstname + ' ' + lastname}
           </h2>
           <p id="passenger_email" className="text-secondary">
