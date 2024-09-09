@@ -6,15 +6,19 @@ export interface Passenger {
   image: string
 }
 
-export async function fetchPassengers(): Promise<Passenger[] | null> {
+export async function fetchPassengers(
+  limit: number
+): Promise<Passenger[] | null> {
   try {
-    const response = await fetch('https://fakerapi.it/api/v2/persons')
+    const response = await fetch(
+      `https://fakerapi.it/api/v2/persons?_quantity=${limit}`
+    )
     const data = await response.json()
 
     if (response.ok) {
       return data.data
     } else {
-      console.error('Failed to fetch persons data')
+      console.error('Failed to passenger data')
       return null
     }
   } catch (err) {

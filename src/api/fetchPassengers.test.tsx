@@ -1,6 +1,7 @@
 import { fetchPassengers, Passenger } from './fetchPassengers'
 
 global.fetch = jest.fn()
+global.console.error = jest.fn()
 
 describe('fetchPassengers', () => {
   afterEach(() => {
@@ -24,33 +25,34 @@ describe('fetchPassengers', () => {
         image: 'https://example.com/image2.jpg',
       },
     ]
-
-    // Mock fetch to resolve successfully
     ;(global.fetch as jest.Mock).mockResolvedValue({
       ok: true,
       json: async () => ({ data: mockPassengers }),
     })
 
-    const result = await fetchPassengers()
+    const result = await fetchPassengers(2)
     expect(result).toEqual(mockPassengers)
   })
 
   it('should return null when API call fails', async () => {
-    // Mock fetch to return a failure response
     ;(global.fetch as jest.Mock).mockResolvedValue({
       ok: false,
       json: async () => ({}),
     })
 
-    const result = await fetchPassengers()
+    const result = await fetchPassengers(2)
     expect(result).toBeNull()
+    expect(console.error).toHaveBeenCalledWith('Failed to passenger data')
   })
 
   it('should return null when an error occurs during the API call', async () => {
-    // Mock fetch to reject with an error
     ;(global.fetch as jest.Mock).mockRejectedValue(new Error('API error'))
 
-    const result = await fetchPassengers()
+    const result = await fetchPassengers(2)
     expect(result).toBeNull()
+    expect(console.error).toHaveBeenCalledWith(
+      'An error occurred while fetching data:',
+      expect.any(Error)
+    )
   })
 })
