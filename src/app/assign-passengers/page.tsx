@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { fetchPassengers, Passenger } from '@/api/fetchPassengers'
 import Starship from '@/Components/Starship'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const STARSHIP_CAPACITY = 7
 
@@ -10,15 +12,12 @@ const StarshipAssign = () => {
   const [passengers, setPassengers] = useState<Passenger[] | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  // State to store assigned passengers to specific starships, initialized with localStorage data if present
   const [assignedPassengers, setAssignedPassengers] = useState<(Passenger | null)[]>(() => {
     const savedAssignments = localStorage.getItem('assignedPassengers')
     return savedAssignments ? JSON.parse(savedAssignments) : []
   })
-  const [assignmentError, setAssignmentError] = useState<string | null>(null)
   const [passengerLimit, setPassengerLimit] = useState<number>(10)
 
-  // Getting the  passengers from local storage, if nothing is there uses the api call to get passengers :-)
   useEffect(() => {
     const savedPassengerData = localStorage.getItem('passengerData')
     if (savedPassengerData) {
@@ -55,7 +54,6 @@ const StarshipAssign = () => {
     }
   }, [passengerLimit])
 
-  // Counts the number of passengers which are assigned to a specific starship
   const getAssignedCountForStarship = (starshipIndex: number) => {
     const startIndex = starshipIndex * STARSHIP_CAPACITY
     const endIndex = startIndex + STARSHIP_CAPACITY
@@ -65,11 +63,10 @@ const StarshipAssign = () => {
 
   const handleAssignPassenger = (selectedPassenger: Passenger, index: number) => {
     const starshipIndex = Math.floor(index / STARSHIP_CAPACITY)
-    // Check if the previous starship is full before assigning to the current one
     if (starshipIndex > 0) {
       const passengersInPreviousStarship = getAssignedCountForStarship(starshipIndex - 1)
       if (passengersInPreviousStarship < STARSHIP_CAPACITY) {
-        setAssignmentError(
+        toast.error(
           `You cannot assign passengers to Starship ${starshipIndex + 1} before Starship ${starshipIndex} is full.`
         )
         return
@@ -77,17 +74,13 @@ const StarshipAssign = () => {
     }
 
     const passengersInCurrentStarship = getAssignedCountForStarship(starshipIndex)
-    // Check if the current starship has space left for the passenger
     if (passengersInCurrentStarship < STARSHIP_CAPACITY) {
       setAssignedPassengers(prevAssignments => {
         const nextAssignment = [...prevAssignments]
         nextAssignment[index] = selectedPassenger
         localStorage.setItem('assignedPassengers', JSON.stringify(nextAssignment))
-        setAssignmentError(null)
         return nextAssignment
       })
-    } else {
-      setAssignmentError(`Starship ${starshipIndex + 1} is full!`)
     }
   }
 
@@ -100,10 +93,11 @@ const StarshipAssign = () => {
     })
   }
 
-  const unassignedPassengers = passengers?.filter(p => !assignedPassengers.includes(p)) || []
-
+  const unassignedPassengers =
+    passengers?.filter(
+      p => !assignedPassengers.includes(p) && !assignedPassengers.find(ap => ap?.id === p.id && ap?.checkedIn)
+    ) || []
   const totalStarships = passengers ? Math.ceil(passengers.length / STARSHIP_CAPACITY) : 0
-
   const passengersLeftToAssign = unassignedPassengers.length
 
   if (loading) {
@@ -120,10 +114,10 @@ const StarshipAssign = () => {
 
   return (
     <div className='min-h-screen p-6 text-primary'>
+      <ToastContainer />
       <h1 className='mb-10 text-center text-4xl font-bold'>Starship Passenger Assignment</h1>
       <p className='mb-4 text-center text-xl'>Please assign the required passengers to the correct starship</p>
       <p className='mb-6 text-center text-xl'>{passengersLeftToAssign} passengers left to assign</p>
-      {/* Adds in the ability to select the amount of users the api calls */}
       {!localStorage.getItem('passengerData') && (
         <div className='mb-6 flex justify-center'>
           <label
@@ -145,7 +139,6 @@ const StarshipAssign = () => {
           </select>
         </div>
       )}
-      {assignmentError && <p className='mb-4 text-center text-red-500'>{assignmentError}</p>}
       <div className='flex flex-col items-center space-y-12'>
         {Array.from({ length: totalStarships }).map((_, starshipIndex) => (
           <Starship

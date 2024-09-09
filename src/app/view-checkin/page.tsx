@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import { Passenger } from '@/api/fetchPassengers'
 import { Widget } from '@/Components/Widget'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const STARSHIP_CAPACITY = 7
 
@@ -30,6 +32,7 @@ const StarshipCheckIn = () => {
       const nextAssignments = [...prevAssignments]
       if (nextAssignments[index]) {
         nextAssignments[index] = { ...nextAssignments[index], checkedIn: true }
+        toast.success(`${nextAssignments[index].firstname} ${nextAssignments[index].lastname} has been checked in!`)
       }
       localStorage.setItem('assignedPassengers', JSON.stringify(nextAssignments))
       return nextAssignments
@@ -42,6 +45,7 @@ const StarshipCheckIn = () => {
 
   return (
     <div className='min-h-screen p-6 text-primary'>
+      <ToastContainer />
       <h1 className='mb-10 text-center text-4xl font-bold text-primary'>Starship Status</h1>
       <p className='mb-4 text-center text-xl text-primary'>
         View the current capacity of each starship and check in passengers
