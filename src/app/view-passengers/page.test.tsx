@@ -10,9 +10,7 @@ describe('PassengerList Component', () => {
   })
 
   it('should display loading message while passengers are being fetched', () => {
-    ;(fetchPassengers as jest.Mock).mockImplementation(
-      () => new Promise(() => {})
-    )
+    ;(fetchPassengers as jest.Mock).mockImplementation(() => new Promise(() => {}))
 
     render(<PassengerList />)
 
@@ -20,9 +18,7 @@ describe('PassengerList Component', () => {
   })
 
   it('should display error message when fetching passengers fails', async () => {
-    ;(fetchPassengers as jest.Mock).mockRejectedValue(
-      new Error('Failed to load passengers.')
-    )
+    ;(fetchPassengers as jest.Mock).mockRejectedValue(new Error('Failed to load passengers.'))
 
     render(<PassengerList />)
 
@@ -38,15 +34,15 @@ describe('PassengerList Component', () => {
         lastname: 'Doe',
         email: 'john.doe@example.com',
         phone: '123-456-7890',
-        image: '/images/profile.jpg',
+        image: '/images/profile.jpg'
       },
       {
         firstname: 'Jane',
         lastname: 'Smith',
         email: 'jane.smith@example.com',
         phone: '098-765-4321',
-        image: '/images/profile2.jpg',
-      },
+        image: '/images/profile2.jpg'
+      }
     ]
 
     // Mock fetchPassengers to resolve with mock passenger data

@@ -15,17 +15,15 @@ const Starship: React.FC<StarshipProps> = ({
   passengers,
   onAssignPassenger,
   onRemovePassenger,
-  unassignedPassengers,
+  unassignedPassengers
 }) => {
   const passengerCapacity = 7
 
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h2 className="text-2xl font-bold text-center text-primary mb-4">
-        Starship {starshipIndex + 1}
-      </h2>
-      <div className="relative flex items-center bg-gray-900 p-8 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto">
-        <div className="grid grid-flow-col gap-4 justify-center">
+    <div className='flex flex-col items-center space-y-4'>
+      <h2 className='mb-4 text-center text-2xl font-bold text-black'>Starship {starshipIndex + 1}</h2>
+      <div className='relative mx-auto flex w-full max-w-3xl items-center rounded-3xl bg-gray-200 p-8 shadow-2xl'>
+        <div className='grid grid-flow-col justify-center gap-4'>
           {Array.from({ length: passengerCapacity }).map((_, seatIndex) => {
             const assignedIndex = starshipIndex * passengerCapacity + seatIndex
             const assignedPassenger = passengers[assignedIndex]
@@ -35,9 +33,7 @@ const Starship: React.FC<StarshipProps> = ({
                 key={seatIndex}
                 passenger={assignedPassenger}
                 isAssigned={!!assignedPassenger}
-                onAssign={(selectedPassenger) =>
-                  onAssignPassenger(selectedPassenger, assignedIndex)
-                }
+                onAssign={selectedPassenger => onAssignPassenger(selectedPassenger, assignedIndex)}
                 onRemove={() => onRemovePassenger(assignedIndex)}
                 unassignedPassengers={unassignedPassengers}
               />

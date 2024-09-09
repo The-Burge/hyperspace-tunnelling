@@ -36,34 +36,37 @@ const StarshipPassengers = () => {
     loadPassengers()
   }, [passengerLimit])
 
-  const handlePassengerLimitChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handlePassengerLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPassengerLimit(Number(event.target.value))
   }
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <p className='text-black'>Loading...</p>
+      </div>
+    )
   }
 
   if (error) {
-    return <p>{error}</p>
+    return <p className='text-red-500'>{error}</p>
   }
 
   return (
-    <div className="min-h-screen p-6">
-      <h1 className="text-2xl font-bold text-center mb-6 text-primary">
-        Passenger List
-      </h1>
+    <div className='min-h-screen p-6'>
+      <h1 className='mb-6 text-center text-2xl font-bold text-primary'>Passenger List</h1>
 
       {/* Dropdown to select number of passengers */}
-      <div className="flex justify-center mb-6">
-        <label htmlFor="passenger-limit" className="mr-4 text-lg font-medium">
+      <div className='mb-6 flex justify-center'>
+        <label
+          htmlFor='passenger-limit'
+          className='mr-4 text-lg font-medium text-primary'
+        >
           Select number of passengers:
         </label>
         <select
-          id="passenger-limit"
-          className="p-2 rounded-lg border border-gray-300"
+          id='passenger-limit'
+          className='rounded-lg border border-primary p-2 text-primary'
           value={passengerLimit}
           onChange={handlePassengerLimitChange}
         >
@@ -75,9 +78,12 @@ const StarshipPassengers = () => {
       </div>
 
       {passengers && passengers.length > 0 ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-40">
+        <ul className='grid grid-cols-1 gap-10 px-40 sm:grid-cols-2 lg:grid-cols-4'>
           {passengers.map((passenger, index) => (
-            <li key={index} className="transition-transform hover:scale-105">
+            <li
+              key={index}
+              className='transition-transform hover:scale-105'
+            >
               <PassengerCard
                 image={`https://robohash.org/${passenger.firstname}`}
                 firstname={passenger.firstname}
@@ -89,7 +95,7 @@ const StarshipPassengers = () => {
           ))}
         </ul>
       ) : (
-        <p>No passengers available.</p>
+        <p className='text-gray-500'>No passengers available.</p>
       )}
     </div>
   )

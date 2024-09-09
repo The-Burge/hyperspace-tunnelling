@@ -14,7 +14,7 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
   onAssign,
   onRemove,
   isAssigned,
-  unassignedPassengers,
+  unassignedPassengers
 }) => {
   const [isAssigning, setIsAssigning] = useState(false)
 
@@ -22,13 +22,9 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
     setIsAssigning(true)
   }
 
-  const handleSelectPassenger = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleSelectPassenger = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEmail = event.target.value
-    const selectedPassenger = unassignedPassengers.find(
-      (p) => p.email === selectedEmail
-    )
+    const selectedPassenger = unassignedPassengers.find(p => p.email === selectedEmail)
 
     if (selectedPassenger) {
       onAssign(selectedPassenger)
@@ -37,11 +33,11 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className='flex flex-col items-center'>
       <div
-        className={`w-16 h-16 flex items-center justify-center rounded-full shadow-md text-lg font-bold ${
-          isAssigned ? 'bg-green-500' : 'bg-blue-500'
-        }`}
+        className={`flex h-16 w-16 items-center justify-center rounded-full text-lg font-bold shadow-md ${
+          isAssigned ? 'bg-secondary' : 'bg-gray-500'
+        } text-white`}
       >
         {isAssigned ? (
           <span>
@@ -54,9 +50,9 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
       </div>
       {isAssigned ? (
         <>
-          <p className="text-center mt-2 text-white">{passenger?.firstname}</p>
+          <p className='mt-2 text-center text-primary'>{passenger?.firstname}</p>
           <button
-            className="mt-2 bg-red-500 hover:bg-red-700 text-white p-2 rounded-lg"
+            className='mt-2 rounded-lg bg-red-500 p-2 text-white hover:bg-red-700'
             onClick={onRemove}
           >
             Remove
@@ -66,19 +62,22 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
         <>
           {!isAssigning ? (
             <button
-              className="mt-2 bg-primary hover:bg-secondary text-white p-2 rounded-lg"
+              className='mt-2 rounded-lg bg-secondary p-2 text-white hover:bg-blue-600'
               onClick={handleAssignClick}
             >
               Assign
             </button>
           ) : (
             <select
-              className="mt-2 p-2 bg-gray-200 rounded-lg"
+              className='bg-forground mt-2 rounded-lg p-2 text-primary'
               onChange={handleSelectPassenger}
             >
-              <option value="">Select Passenger</option>
-              {unassignedPassengers.map((passenger) => (
-                <option key={passenger.email} value={passenger.email}>
+              <option value=''>Select Passenger</option>
+              {unassignedPassengers.map(passenger => (
+                <option
+                  key={passenger.email}
+                  value={passenger.email}
+                >
                   {passenger.firstname} {passenger.lastname}
                 </option>
               ))}

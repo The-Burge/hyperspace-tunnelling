@@ -6,35 +6,36 @@ const widgets = [
   {
     img: '/image/passengers.png',
     name: 'View Passengers',
-    page: '/view-passengers',
+    page: '/view-passengers'
   },
   {
     img: '/image/assign.png',
     name: 'Assign Passengers',
-    page: '/assign-passengers',
+    page: '/assign-passengers'
   },
   {
     img: '/image/Checkin.png',
     name: 'Checkin Passengers',
-    page: '/view-checkin',
-  },
+    page: '/view-checkin'
+  }
 ]
 
 export default function Home() {
   return (
-    <div className="flex justify-center items-center flex-col mx-auto w-full max-w-screen-2xl p-4">
-      <div className="flex justify-center items-center pt-2 lg:pt-5">
-        <div className="lg:text-5xl text-2xl font-semibold text-center text-primary">
+    <div className='mx-auto flex w-full max-w-screen-2xl flex-col items-center justify-center p-4'>
+      <div className='flex items-center justify-center pt-2 lg:pt-5'>
+        <div className='text-center text-2xl font-semibold text-primary lg:text-5xl'>
           Welcome to StarSeeker Gate Agent
-          <p className="!font-normal pt-10 text-lg">
-            Please select one of the following options
-          </p>
+          <p className='pt-10 text-lg !font-normal'>Please select one of the following options</p>
         </div>
       </div>
-      <div className="pt-4">
-        <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-3 justify-items-center place-items-center p-5">
+      <div className='pt-4'>
+        <div className='grid grid-cols-1 place-items-center justify-items-center gap-20 p-5 md:grid-cols-2 lg:grid-cols-3'>
           {widgets.map((items, index) => (
-            <Widget key={index} items={items} />
+            <Widget
+              key={index}
+              items={items}
+            />
           ))}
         </div>
       </div>

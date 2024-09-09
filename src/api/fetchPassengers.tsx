@@ -6,13 +6,9 @@ export interface Passenger {
   image: string
 }
 
-export async function fetchPassengers(
-  limit: number
-): Promise<Passenger[] | null> {
+export async function fetchPassengers(limit: number): Promise<Passenger[] | null> {
   try {
-    const response = await fetch(
-      `https://fakerapi.it/api/v2/persons?_quantity=${limit}`
-    )
+    const response = await fetch(`https://fakerapi.it/api/v2/persons?_quantity=${limit}`)
     const data = await response.json()
 
     if (response.ok) {

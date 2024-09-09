@@ -15,19 +15,19 @@ describe('fetchPassengers', () => {
         lastname: 'Doe',
         email: 'john.doe@example.com',
         phone: '123456789',
-        image: 'https://example.com/image1.jpg',
+        image: 'https://example.com/image1.jpg'
       },
       {
         firstname: 'Jane',
         lastname: 'Smith',
         email: 'jane.smith@example.com',
         phone: '987654321',
-        image: 'https://example.com/image2.jpg',
-      },
+        image: 'https://example.com/image2.jpg'
+      }
     ]
     ;(global.fetch as jest.Mock).mockResolvedValue({
       ok: true,
-      json: async () => ({ data: mockPassengers }),
+      json: async () => ({ data: mockPassengers })
     })
 
     const result = await fetchPassengers(2)
@@ -37,7 +37,7 @@ describe('fetchPassengers', () => {
   it('should return null when API call fails', async () => {
     ;(global.fetch as jest.Mock).mockResolvedValue({
       ok: false,
-      json: async () => ({}),
+      json: async () => ({})
     })
 
     const result = await fetchPassengers(2)
@@ -50,9 +50,6 @@ describe('fetchPassengers', () => {
 
     const result = await fetchPassengers(2)
     expect(result).toBeNull()
-    expect(console.error).toHaveBeenCalledWith(
-      'An error occurred while fetching data:',
-      expect.any(Error)
-    )
+    expect(console.error).toHaveBeenCalledWith('An error occurred while fetching data:', expect.any(Error))
   })
 })

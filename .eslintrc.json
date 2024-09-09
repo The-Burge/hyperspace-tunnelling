@@ -1,3 +1,107 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  // configuration for javascript files
+  "extends": [
+    "next/core-web-vitals", // needed to avoid warning in next.js build: 'The Next.js plugin was not detected in your ESLint configuration'
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["unicorn"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "semi": false
+      }
+    ]
+  },
+  "ignorePatterns": ["next-env.d.ts", "*.json", "!src/i18n/locales/**/*.json"],
+  "overrides": [
+    // configuration for typescript files
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["@typescript-eslint", "unused-imports", "simple-import-sort"],
+      "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "endOfLine": "auto",
+            "semi": false
+          }
+        ],
+        "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
+        "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+        "import/prefer-default-export": "off", // Named export is easier to refactor automatically
+        "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
+        "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
+        "react/function-component-definition": [
+          "error",
+          {
+            "namedComponents": ["function-declaration", "arrow-function"],
+            "unnamedComponents": "arrow-function"
+          }
+        ],
+        "max-params": ["error", 3], // Limit the number of parameters in a function to use object instead
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "jsx-quotes": ["error", "prefer-single"],
+        "react/display-name": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/no-unescaped-entities": "off",
+        "no-catch-shadow": "off"
+      }
+    },
+    // Configuration for translations files (i18next)
+    {
+      "files": ["src/i18n/locales/**/*.json"],
+      "extends": ["plugin:i18n-json/recommended"],
+      "rules": {
+        "i18n-json/valid-message-syntax": 0,
+        // "i18n-json/valid-message-syntax": [
+        //   2,
+        //   {
+        //     syntax: path.resolve("./scripts/i18next-syntax-validation.js")
+        //   }
+        // ],
+        "i18n-json/valid-json": 2,
+        "i18n-json/sorted-keys": [
+          2,
+          {
+            "order": "asc",
+            "indentSpaces": 2
+          }
+        ],
+        // "i18n-json/identical-keys": [
+        //   2,
+        //   {
+        //     "filePath": "path.resolve('public/locales/en/common.json')"
+        //   }
+        // ],
+        "prettier/prettier": [
+          0,
+          {
+            "singleQuote": true,
+            "endOfLine": "auto"
+          }
+        ]
+      }
+    },
+    // configuration for testing
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:jest-formatting/recommended",
+        "plugin:jest-dom/recommended",
+        "plugin:testing-library/react"
+      ]
+    }
+  ]
 }
