@@ -5,18 +5,18 @@ import React from 'react'
 jest.mock('next/navigation', () => ({
   useRouter() {
     return {
-      prefetch: () => null,
+      prefetch: () => null
     }
-  },
+  }
 }))
 
 beforeAll(() => {
   window.scrollTo = jest.fn()
-  window.matchMedia = jest.fn().mockImplementation((query) => {
+  window.matchMedia = jest.fn().mockImplementation(query => {
     return {
       matches: query.includes(`max-width: ${window.innerWidth}px`),
       addListener: jest.fn(),
-      removeListener: jest.fn(),
+      removeListener: jest.fn()
     }
   })
 })
