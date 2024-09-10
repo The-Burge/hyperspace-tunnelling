@@ -1,7 +1,7 @@
 import { error } from 'console'
 
 export interface Passenger {
-  id: string
+  id: any
   firstname: string
   lastname: string
   email: string

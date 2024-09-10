@@ -9,7 +9,7 @@ interface PassengerCardProps {
   phone: string
 }
 
-const PassengerCard: React.FC<PassengerCardProps> = ({ image, firstname, lastname, email, phone }) => {
+const PassengerUserCard: React.FC<PassengerCardProps> = ({ image, firstname, lastname, email, phone }) => {
   return (
     <div
       id='passenger_card'
@@ -54,4 +54,4 @@ const PassengerCard: React.FC<PassengerCardProps> = ({ image, firstname, lastnam
   )
 }
 
-export default PassengerCard
+export default PassengerUserCard

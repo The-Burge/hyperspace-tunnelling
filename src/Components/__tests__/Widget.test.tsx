@@ -1,25 +1,49 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { Widget } from '../Widget'
 
-import PassengerCard from '../UserCard'
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    prefetch: () => null
+  })
+}))
 
-describe('PassengerCard', () => {
+describe('Does the widget work?', () => {
   const mockProps = {
-    image: '/images/profile.jpg',
-    firstname: 'Dave',
-    lastname: 'Smith',
-    email: 'daveloves@beer.com',
-    phone: '0123456789',
+    img: '/images/profile.jpg',
+    name: 'Lance Armstrong',
+    page: '/space/moon'
   }
-  it('renders passenger card', () => {
-    render(<PassengerCard {...mockProps} />)
-    expect(document.getElementById('passenger_card')).toBeInTheDocument()
+
+  const mockPush = jest.fn()
+
+  beforeEach(() => {
+    mockPush.mockClear()
+    jest.spyOn(require('next/navigation'), 'useRouter').mockReturnValue({
+      push: mockPush,
+      prefetch: () => null
+    })
   })
 
-  it('renders navigation items', () => {
-    render(<PassengerCard {...mockProps} />)
-    expect(document.getElementById('passenger_card')).toBeInTheDocument()
-    expect(screen.getByText('0123456789')).toBeInTheDocument()
-    expect(screen.getByText('Dave Smith')).toBeInTheDocument()
-    expect(screen.getByText('daveloves@beer.com')).toBeInTheDocument()
+  it('renders widget card', () => {
+    render(<Widget items={mockProps} />)
+    expect(document.getElementById('widget_card')).toBeInTheDocument()
+  })
+
+  it('renders widget card content', () => {
+    render(<Widget items={mockProps} />)
+    expect(document.getElementById('widget_card')).toBeInTheDocument()
+    expect(document.getElementById('widget_body')).toBeInTheDocument()
+    expect(document.getElementById('widget_image')).toBeInTheDocument()
+    expect(document.getElementById('widget_text')).toBeInTheDocument()
+    expect(screen.getByText('Lance Armstrong')).toBeInTheDocument()
+  })
+
+  it('should call the correct page on click', () => {
+    render(<Widget items={mockProps} />)
+
+    fireEvent.click(document.getElementById('widget_card')!)
+
+    expect(mockPush).toHaveBeenCalledWith('/space/moon')
   })
 })

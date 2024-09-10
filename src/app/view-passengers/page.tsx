@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { fetchPassengers, Passenger } from '@/api/fetchPassengers'
-import PassengerCard from '@/Components/UserCard'
+import PassengerUserCard from '@/Components/UserCard'
 
 const StarshipPassengers = () => {
   const [passengers, setPassengers] = useState<Passenger[] | null>(null)
@@ -84,7 +84,7 @@ const StarshipPassengers = () => {
               key={index}
               className='transition-transform hover:scale-105'
             >
-              <PassengerCard
+              <PassengerUserCard
                 image={`https://robohash.org/${passenger.firstname}`}
                 firstname={passenger.firstname}
                 lastname={passenger.lastname}
