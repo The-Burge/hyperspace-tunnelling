@@ -1,3 +1,5 @@
+import { error } from 'console'
+
 export interface Passenger {
   id: string
   firstname: string
@@ -19,8 +21,8 @@ export async function fetchPassengers(limit: number): Promise<Passenger[] | null
       console.error('Failed to passenger data')
       return null
     }
-  } catch (err) {
-    console.error('An error occurred while fetching data:', err)
+  } catch {
+    console.error('An error occurred while fetching data:')
     return null
   }
 }

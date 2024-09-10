@@ -16,7 +16,7 @@ const StarshipAssign = () => {
     const savedAssignments = localStorage.getItem('assignedPassengers')
     return savedAssignments ? JSON.parse(savedAssignments) : []
   })
-  const [passengerLimit, setPassengerLimit] = useState<number>(10)
+  const [passengerQuantity, setpassengerQuantity] = useState<number>(10)
 
   useEffect(() => {
     const savedPassengerData = localStorage.getItem('passengerData')
@@ -28,7 +28,7 @@ const StarshipAssign = () => {
         setLoading(true)
         setError(null)
         try {
-          const data = await fetchPassengers(passengerLimit)
+          const data = await fetchPassengers(passengerQuantity)
           if (data) {
             localStorage.setItem('passengerData', JSON.stringify(data))
             if (!localStorage.getItem('assignedPassengers')) {
@@ -52,7 +52,7 @@ const StarshipAssign = () => {
 
       loadPassengers()
     }
-  }, [passengerLimit])
+  }, [passengerQuantity])
 
   const getAssignedCountForStarship = (starshipIndex: number) => {
     const startIndex = starshipIndex * STARSHIP_CAPACITY
@@ -121,17 +121,12 @@ const StarshipAssign = () => {
       <p className='mb-6 text-center text-xl'>{passengersLeftToAssign} passengers left to assign</p>
       {!localStorage.getItem('passengerData') && (
         <div className='mb-6 flex justify-center'>
-          <label
-            htmlFor='passenger-limit'
-            className='mr-4 text-lg font-medium'
-          >
-            Select number of passengers:
-          </label>
+          <label className='mr-4 text-lg font-medium'>Select number of passengers:</label>
           <select
             id='passenger-limit'
             className='rounded-lg border border-gray-300 p-2'
-            value={passengerLimit}
-            onChange={event => setPassengerLimit(Number(event.target.value))}
+            value={passengerQuantity}
+            onChange={event => setpassengerQuantity(Number(event.target.value))}
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
