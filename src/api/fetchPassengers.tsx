@@ -21,8 +21,8 @@ export async function fetchPassengers(quantity: number): Promise<Passenger[] | n
       console.error('Failed to passenger data')
       return null
     }
-  } catch {
-    console.error('An error occurred while fetching data:')
+  } catch (message) {
+    console.error('An error occurred while fetching data:', message)
     return null
   }
 }
