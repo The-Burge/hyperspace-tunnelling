@@ -10,6 +10,7 @@ It uses the following resources
 - https://fakerapi.it/api/v2/persons for faking the passenger data
 - https://robohash.org for randomly generating avatar images
 - Local storage to save the state of passengers that require assigning and checking in
+- https://fkhadra.github.io/react-toastify/introduction Toastify for notifications
 
 ## Getting Started
 
@@ -26,6 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Increase total test coverage as currently its 💩
 - Add toastify for when a passenger gets assigned, removed and other errors
+- Speak to Nasa to see they want to use this for there next space mission.....
 
 ## Known bugs 🐛
 
