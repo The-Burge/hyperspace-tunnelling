@@ -10,6 +10,7 @@ It uses the following resources
 - https://fakerapi.it/api/v2/persons for faking the passenger data
 - https://robohash.org for randomly generating avatar images
 - Local storage to save the state of passengers that require assigning and checking in
+- https://fkhadra.github.io/react-toastify/introduction Toastify for notifications
 
 ## Getting Started
 
