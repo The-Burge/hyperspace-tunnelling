@@ -9,20 +9,20 @@ describe('fetchPassengers', () => {
   })
 
   it('should return passengers data when API call is successful', async () => {
-    const mockPassengers: Passenger[] = [
+    const mockPassengers = [
       {
         firstname: 'John',
         lastname: 'Doe',
         email: 'john.doe@example.com',
-        phone: '123456789',
-        image: 'https://example.com/image1.jpg'
+        phone: '123-456-7890',
+        image: '/images/profile.jpg'
       },
       {
         firstname: 'Jane',
         lastname: 'Smith',
         email: 'jane.smith@example.com',
-        phone: '987654321',
-        image: 'https://example.com/image2.jpg'
+        phone: '098-765-4321',
+        image: '/images/profile2.jpg'
       }
     ]
     ;(global.fetch as jest.Mock).mockResolvedValue({

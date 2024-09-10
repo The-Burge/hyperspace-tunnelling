@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-interface PassengerCardProps {
+interface PassengerUserCardProps {
   image: string
   firstname: string
   lastname: string
@@ -9,7 +9,7 @@ interface PassengerCardProps {
   phone: string
 }
 
-const PassengerUserCard: React.FC<PassengerCardProps> = ({ image, firstname, lastname, email, phone }) => {
+const PassengerUserCard: React.FC<PassengerUserCardProps> = ({ image, firstname, lastname, email, phone }) => {
   return (
     <div
       id='passenger_card'

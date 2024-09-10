@@ -33,14 +33,17 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
   }
 
   return (
-    <div className='flex flex-col items-center'>
+    <div
+      id='passenger_card'
+      className='flex flex-col items-center'
+    >
       <div
         className={`flex h-16 w-16 items-center justify-center rounded-full text-lg font-bold shadow-md ${
           isAssigned ? 'bg-secondary' : 'bg-gray-500'
         } text-white`}
       >
         {isAssigned ? (
-          <span>
+          <span id='passenger_card_intials'>
             {passenger?.firstname[0]}
             {passenger?.lastname[0]}
           </span>
@@ -50,8 +53,14 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
       </div>
       {isAssigned ? (
         <>
-          <p className='mt-2 text-center text-primary'>{passenger?.firstname}</p>
+          <p
+            id='passenger_card_firstname'
+            className='mt-2 text-center text-primary'
+          >
+            {passenger?.firstname}
+          </p>
           <button
+            id='passenger_card_remove_button'
             className='mt-2 rounded-lg bg-red-500 p-2 text-white hover:bg-red-700'
             onClick={onRemove}
           >
@@ -62,6 +71,7 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
         <>
           {!isAssigning ? (
             <button
+              id='passenger_card_assign_button'
               className='mt-2 rounded-lg bg-secondary p-2 text-white hover:bg-blue-600'
               onClick={handleAssignClick}
             >
@@ -69,6 +79,7 @@ const PassengerCard: React.FC<PassengerCardProps> = ({
             </button>
           ) : (
             <select
+              id='passenger_select'
               className='bg-forground mt-2 rounded-lg p-2 text-primary'
               onChange={handleSelectPassenger}
             >

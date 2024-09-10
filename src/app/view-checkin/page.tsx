@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Passenger } from '@/api/fetchPassengers'
-import { Widget } from '@/Components/Widget'
+import { Widget } from '@/Components/widget'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -32,7 +32,9 @@ const StarshipCheckIn = () => {
       const nextAssignments = [...prevAssignments]
       if (nextAssignments[index]) {
         nextAssignments[index] = { ...nextAssignments[index], checkedIn: true }
-        toast.success(`${nextAssignments[index].firstname} ${nextAssignments[index].lastname} has been checked in!`)
+        toast.success(`${nextAssignments[index].firstname} ${nextAssignments[index].lastname} has been checked in!`, {
+          icon: <span>👨🏻‍🚀</span>
+        })
       }
       localStorage.setItem('assignedPassengers', JSON.stringify(nextAssignments))
       return nextAssignments
