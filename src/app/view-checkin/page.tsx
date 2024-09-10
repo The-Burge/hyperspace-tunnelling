@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Passenger } from '@/api/fetchPassengers'
-import { Widget } from '@/Components/widget'
+import { Widget } from '@/Components/Widget'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 

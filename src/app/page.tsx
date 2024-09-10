@@ -1,5 +1,4 @@
-'use client'
-import { Widget } from '@/Components/Widget'
+import { Widget } from '@/Components/widget'
 import React from 'react'
 
 const widgets = [
