@@ -10,7 +10,7 @@ const STARSHIP_CAPACITY = 7
 
 const StarshipAssign = () => {
   const [passengers, setPassengers] = useState<Passenger[] | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [assignedPassengers, setAssignedPassengers] = useState<(Passenger | null)[]>(() => {
     const savedAssignments = localStorage.getItem('assignedPassengers')
@@ -97,6 +97,7 @@ const StarshipAssign = () => {
     passengers?.filter(
       p => !assignedPassengers.includes(p) && !assignedPassengers.find(ap => ap?.id === p.id && ap?.checkedIn)
     ) || []
+
   const totalStarships = passengers ? Math.ceil(passengers.length / STARSHIP_CAPACITY) : 0
   const passengersLeftToAssign = unassignedPassengers.length
 

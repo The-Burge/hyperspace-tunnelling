@@ -1,9 +1,11 @@
 export interface Passenger {
+  id: string
   firstname: string
   lastname: string
   email: string
   phone: string
   image: string
+  checkedIn: boolean
 }
 
 export async function fetchPassengers(limit: number): Promise<Passenger[] | null> {
